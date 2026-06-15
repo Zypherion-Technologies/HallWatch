@@ -16,9 +16,7 @@ namespace HaW
     public:
         static BOOL   IsTrustedCaller( UINT64 Address );
         static BOOL   IsKnownImageRip( UINT64 Address );
-        static Hook*  LookupHook( UINT64 Rip );
         static UINT32 FirstSuspiciousFrame( PCONTEXT StartContext );
-        static BOOL   HasPrecedingCall( UINT64 ReturnAddress );
     };
 }
 
