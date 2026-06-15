@@ -33,6 +33,17 @@ Eventually I stopped trying to convince Windows that PAGE_GUARD should behave th
 
 ---
 
+<p align="center">
+  <video src="https://github.com/Zypherion-Technologies/HallWatch/raw/main/hallwatch.mp4"
+         width="720"
+         controls
+         muted
+         playsinline>
+  </video>
+</p>
+
+---
+
 The byte at the syscall instruction is `0F 05`. The first byte alone (`0F`) is the prefix for a family of two byte opcodes including SYSCALL, CPUID, and RDTSC. By itself it is not executable; the CPU needs the second byte to decode. If you replace the first byte with `0xCC` (INT3), the pair becomes `CC 05`, which the CPU decodes as INT3 followed by a stray byte it never reaches. Any code path that lands on that address raises `EXCEPTION_BREAKPOINT`.
 
 That is the whole mechanism. Our VEH catches the breakpoint, looks up which stub the address belongs to (we build the map at init time by enumerating ntdll's exports), runs three checks on whoever turned up, and sets `Context->Rip` to a private trampoline that does the real syscall and returns. The byte stays `CC`. The next caller hits it the same way so no page protection flipping back and forth.
