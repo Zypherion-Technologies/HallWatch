@@ -106,6 +106,12 @@ What we do instead is the simplest scanner that could work. Every 250 ms the int
 
 That catches Hell's Gate in a fresh RWX allocation and it catches shadow ntdll (a loader doing `NtMapViewOfSection` on `ntdll.dll` to get a private copy at a new address). The shadow case is a fun one. The mapping is not in our module snapshot so its syscall instructions show up as foreign executable bytes, even though they came from a perfectly legitimate signed DLL on disk.
 
+Other variant: the attacker bakes `0F 05` into their own binary's `.text` so the syscall lives inside a loaded module instead of an RWX page. Foreign-RWX skips loaded modules so this used to slip through. So we have another scanner that walks each module's executable bytes, skips ntdll, win32u, and wow64cpu (the three modules that legitimately have syscall instructions), and reports `0F 05` only if there is a `C3` within the next three bytes. The `ret` check is what makes it usable. `0F 05` on its own shows up in compiler output as parts of larger instructions all the time but is never adjacent to a `C3`. Real syscall stubs always are. Log:
+
+```
+[hallwatch] scan: module-text syscall stub at 0x00007FF7FFC9227C in HellsHall-Demo.exe -- Hell's Gate inside loaded module .text
+```
+
 
 ---
 
