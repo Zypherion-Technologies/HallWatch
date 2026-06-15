@@ -305,51 +305,6 @@ namespace HaW
         return TRUE;
     }
 
-    STATIC CONST CHAR* PatchAllowlist[ ] =
-    {
-        "NtAllocateVirtualMemory",
-        "NtProtectVirtualMemory",
-        "NtFreeVirtualMemory",
-        "NtClose",
-        "NtCreateFile",
-        "NtOpenFile",
-        "NtReadFile",
-        "NtWriteFile",
-        "NtCreateSection",
-        "NtMapViewOfSection",
-        "NtUnmapViewOfSection",
-        "NtCreateThreadEx",
-        "NtQueueApcThread",
-        "NtSetContextThread",
-        "NtGetContextThread",
-        "NtOpenProcess",
-        "NtOpenThread",
-        "NtCreateProcess",
-        "NtCreateProcessEx",
-        "NtTerminateProcess",
-        "NtSuspendThread",
-        "NtResumeThread",
-        "NtAdjustPrivilegesToken",
-        "NtOpenProcessToken",
-        "NtDuplicateObject",
-        "NtCreateUserProcess",
-    };
-
-    STATIC BOOL
-    OnPatchAllowlist(
-        CONST CHAR* Name
-    )
-    {
-        for ( SIZE_T i = 0; i < ARRAYSIZE( PatchAllowlist ); i++ )
-        {
-            if ( strcmp( Name, PatchAllowlist[ i ] ) == 0 )
-            {
-                return TRUE;
-            }
-        }
-        return FALSE;
-    }
-
     STATIC CONST CHAR* OffensiveAllowlist[ ] =
     {
         "NtAllocateVirtualMemory",
