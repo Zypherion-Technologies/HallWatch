@@ -33,14 +33,11 @@ Eventually I stopped trying to convince Windows that PAGE_GUARD should behave th
 
 ---
 
-<p align="center">
-  <video src="https://github.com/Zypherion-Technologies/HallWatch/raw/main/hallwatch.mp4"
-         width="720"
-         controls
-         muted
-         playsinline>
-  </video>
-</p>
+# If u have issues understanding, watch this video :)
+
+https://github.com/user-attachments/assets/0cb670fd-e51b-413e-bf00-08f9297888ed
+
+
 
 ---
 
