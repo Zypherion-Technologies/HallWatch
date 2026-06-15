@@ -1,0 +1,6 @@
+LIBRARY
+EXPORTS
+    IscInitialize
+    IscGetDetectionCount
+    IscShutdown
+    IscFlush
